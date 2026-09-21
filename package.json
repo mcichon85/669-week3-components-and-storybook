@@ -1,20 +1,51 @@
 {
   "name": "my-component-library",
+  "version": "1.0.1",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsup",
-    "test": "vitest",
-    "lint": "oxlint",
-    "preview": "vite preview",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+  "description": "A small JavaScript React Native design-system package with browser-based Storybook documentation.",
+  "license": "MIT",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "react-native": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "react-native": "./dist/index.js",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcichon85/669-week3-components-and-storybook"
   },
   "homepage": "https://mcichon85.github.io/669-week3-components-and-storybook/",
   "engines": {
     "node": ">=22.13.0"
+  },
+  "scripts": {
+    "build": "npm run build:code && npm run build:types",
+    "build:code": "tsup src/index.js --format esm,cjs --sourcemap --clean --external react --external react-native",
+    "build:types": "tsc -p jsconfig.build.json",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build -o storybook-static",
+    "lint": "eslint .",
+    "check:js": "tsc -p jsconfig.json",
+    "test": "vitest run",
+    "verify": "npm run lint && npm run check:js && npm run test && npm run build",
+    "prepack": "npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=19.2.0 <20.0.0",
+    "react-native": ">=0.86.0 <0.88.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "latest",
@@ -40,9 +71,5 @@
     "typescript": "~6.0.2",
     "vite": "^8.3.0",
     "vitest": "^4.1.11"
-  },
-  "peerDependencies": {
-    "react": "^19.3.0",
-    "react-native": "^0.87.1"
   }
 }
