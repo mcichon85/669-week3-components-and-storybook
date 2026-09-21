@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": { "declaration": true, "emitDeclarationOnly": true, "noEmit": false, "outDir": "dist", "rootDir": "src", "types": ["react", "react-native"] },
+  "include": ["src/index.ts", "src/tokens.ts", "src/components/**/*.tsx"],
+  "exclude": ["src/**/*.stories.tsx", "src/__tests__/**"]
+}

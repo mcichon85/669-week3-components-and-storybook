@@ -1,0 +1,26 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Documentation/Getting started" />
+
+# SI 669 Component Library
+
+This library provides small, accessible React Native components that work in Expo and in browser Storybook through `react-native-web`.
+
+## Installation
+
+```sh
+npm install si669-component-library
+```
+
+## Components
+
+- `Button` supports primary, secondary, and danger variants in three sizes.
+- `Header` supports brand navigation and signed-in/signed-out states.
+- `Input` supports hints, validation errors, and native text input behavior.
+- `List` supports plain, bordered, compact, and empty states.
+
+Import components and tokens from the package entry point:
+
+```tsx
+import { Button, Input, colors } from 'si669-component-library';
+```

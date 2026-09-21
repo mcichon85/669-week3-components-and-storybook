@@ -1,25 +1,24 @@
-import './Header.css';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import type { GestureResponderEvent } from 'react-native';
+import { colors, spacing } from '../tokens';
 
 export interface HeaderProps {
   siteName?: string;
   loggedIn?: boolean;
   userName?: string;
-  onSignIn?: () => void;
-  onSignOut?: () => void;
+  onSignIn?: (event: GestureResponderEvent) => void;
+  onSignOut?: (event: GestureResponderEvent) => void;
 }
 
 export function Header({ siteName = 'Acme', loggedIn = false, userName = 'Alex', onSignIn, onSignOut }: HeaderProps) {
-  return (
-    <header className="app-header">
-      <a className="app-header__brand" href="#home">{siteName}</a>
-      <nav aria-label="Main navigation" className="app-header__nav">
-        <a href="#products">Products</a><a href="#about">About</a>
-      </nav>
+  return <View style={styles.container}>
+      <Text accessibilityRole="header" style={styles.brand}>{siteName}</Text><View style={styles.nav}><Text style={styles.link}>Products</Text><Text style={styles.link}>About</Text></View>
       {loggedIn ? (
-        <div className="app-header__account"><span>Hi, {userName}</span><button type="button" onClick={onSignOut}>Sign out</button></div>
+        <View style={styles.account}><Text style={styles.greeting}>Hi, {userName}</Text><Pressable accessibilityRole="button" onPress={onSignOut}><Text style={styles.action}>Sign out</Text></Pressable></View>
       ) : (
-        <button className="app-header__sign-in" type="button" onClick={onSignIn}>Sign in</button>
+        <Pressable accessibilityRole="button" onPress={onSignIn}><Text style={styles.action}>Sign in</Text></Pressable>
       )}
-    </header>
-  );
+    </View>;
 }
+
+const styles = StyleSheet.create({ container: { alignItems: 'center', backgroundColor: colors.surface, borderBottomColor: colors.border, borderBottomWidth: 1, flexDirection: 'row', gap: spacing.lg, justifyContent: 'space-between', paddingHorizontal: spacing.lg, paddingVertical: spacing.md }, brand: { color: colors.ink, fontSize: 20, fontWeight: '800' }, nav: { flexDirection: 'row', gap: spacing.md, flex: 1 }, link: { color: colors.muted, fontSize: 14 }, account: { alignItems: 'center', flexDirection: 'row', gap: spacing.sm }, greeting: { color: colors.muted, fontSize: 14 }, action: { color: colors.primary, fontSize: 14, fontWeight: '700' } });

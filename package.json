@@ -1,12 +1,14 @@
 {
-  "name": "my-component-library",
+  "name": "si669-component-library",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsup",
-    "test": "vitest",
+    "build:code": "tsup",
+    "build:types": "tsc -p tsconfig.build.json",
+    "build": "npm run build:code && npm run build:types",
+    "test": "vitest --config vitest.config.ts",
     "lint": "oxlint",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
@@ -23,6 +25,8 @@
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
     "@vitest/browser": "^4.1.11",
     "@vitest/browser-playwright": "^4.1.11",
     "@vitest/coverage-v8": "^4.1.11",
@@ -35,10 +39,18 @@
     "tsup": "^8.5.1",
     "typescript": "~6.0.2",
     "vite": "^8.3.0",
-    "vitest": "^4.1.11"
+    "vitest": "^4.1.11",
+    "jsdom": "^27.0.0"
   },
   "peerDependencies": {
     "react": "^19.3.0",
-    "react-native": "^0.87.1"
-  }
+    "react-native": ">=0.76"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "react-native": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist", "LICENSE", "README.md"],
+  "repository": { "type": "git", "url": "https://github.com/mcichon85/669-week3-components-and-storybook.git" },
+  "homepage": "https://mcichon85.github.io/669-week3-components-and-storybook/"
 }

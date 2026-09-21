@@ -1,32 +1,31 @@
-# React + TypeScript + Vite
+# SI 669 Component Library
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+React Native components that run in Expo and in browser-based Storybook through `react-native-web`.
 
-Currently, two official plugins are available:
+## Components
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- `Button`: primary, secondary, and danger variants; small, medium, and large sizes.
+- `Header`: brand, navigation, signed-in, and signed-out states.
+- `Input`: labels, hints, validation errors, multiline input, and disabled states.
+- `List`: plain, bordered, compact, and empty states.
 
-## React Compiler
+## Development
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```sh
+npm install
+npm run storybook
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Run the checks and production builds with:
+
+```sh
+npm test -- --run
+npm run build
+npm run build-storybook
+```
+
+The public package entry point is `src/index.ts`; design tokens are exported from the same entry point. GitHub Actions publishes Storybook to GitHub Pages on pushes to `main`.
+
+## Consumer app
+
+The separate `../669-week3-consumer-app` project demonstrates all four components across three Expo Router screens. It consumes this library through the tagged Git dependency `v1.0.0`.
