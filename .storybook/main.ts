@@ -12,6 +12,13 @@ const config: StorybookConfig = {
     "@storybook/addon-docs",
     "@storybook/addon-mcp"
   ],
-  "framework": "@storybook/react-vite"
+  "framework": "@storybook/react-vite",
+  async viteFinal(config) {
+    return {
+      ...config,
+      // GitHub Pages serves this project below the repository name, not at /.
+      base: process.env.STORYBOOK_BASE_PATH ?? '/',
+    };
+  },
 };
 export default config;
